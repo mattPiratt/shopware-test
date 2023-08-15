@@ -58,7 +58,8 @@ class BkuCustomFields
                     ]
                 ]
             ];
-            $this->container->get('custom_field_set.repository')->create([$customField], $context);
+            $this->container->get('custom_field_set.repository')
+                ->create([$customField], $context);
         }
     }
 
@@ -82,26 +83,29 @@ class BkuCustomFields
     {
         $customFieldsIds = $this->getCustomFields($context)->getIds();
         if (count($customFieldsIds) !== 0) {
-            $this->container->get('custom_field_set.repository')->delete([[
-                'id' => $customFieldsIds[0]
-            ]], $context);
+            $this->container->get('custom_field_set.repository')
+                ->delete([[
+                    'id' => $customFieldsIds[0]
+                ]], $context);
         }
     }
     private function setCustomFieldsActivate(array $customFieldsIds, bool $active, Context $context): void
     {
-        $this->container->get('custom_field_set.repository')->update([[
-            'id' => $customFieldsIds[0],
-            'active' => $active
-        ]], $context);
+        $this->container->get('custom_field_set.repository')
+            ->update([[
+                'id' => $customFieldsIds[0],
+                'active' => $active
+            ]], $context);
     }
     private function getCustomFields(Context $context): IdSearchResult
     {
-        return $this->container->get('custom_field_set.repository')->searchIds(
-            (new Criteria())->addFilter(new EqualsFilter(
-                'name',
-                self::LABEL_CUSTOM_FIELD_KEY
-            )),
-            $context
-        );
+        return $this->container->get('custom_field_set.repository')
+            ->searchIds(
+                (new Criteria())->addFilter(new EqualsFilter(
+                    'name',
+                    self::LABEL_CUSTOM_FIELD_KEY
+                )),
+                $context
+            );
     }
 }

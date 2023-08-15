@@ -40,3 +40,4 @@ public/asset-manifest.json
 files/asset-manifest.json
 ###< shopware/core ###
 .vscode/launch.json
+.vscode/settings.json
